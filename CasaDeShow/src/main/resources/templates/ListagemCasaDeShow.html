@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPrincipal">
+<head>
+	<title>Listagem de casa de show</title>
+</head>
+<section layout:fragment="conteudo">
+<div class="row justify-content-md-center"> 
+	<div class="col-md-10">
+		<div class="card-header">
+			
+		</div>
+		<div class="card text-center">
+			<div class="card-body">
+				<ul class="list-group list-group-horizontal justify-content-md-center">
+					<li class="list-group-item col-md-12">
+						<a class="btn btn-link  text-right" href="/casaDeShow/novo">Criar nova casa de show</a>
+					</li>
+				</ul>
+				<ul class="list-group list-group-horizontal justify-content-md-center">
+					<li class="list-group-item col-md-1">
+						teste
+					</li>
+					<li class="list-group-item col-md-2">
+						Descrição
+					</li>
+					<li class="list-group-item col-md-2">
+						Data de vencimento
+					</li>
+				</ul>
+				<ul class="list-group list-group-horizontal justify-content-md-center" th:each="casa:${casas}">
+					<li class="list-group-item col-md-1" th:text="${casa.idCasaDeShow}">
+					</li>
+					<li class="list-group-item col-md-2" th:text="${casa.nomeCasa}">
+					</li>
+					<li class="list-group-item col-md-2" th:text="${casa.endereco}">
+					</li>
+				</ul>
+				<ul class="list-group list-group-horizontal justify-content-md-center">
+					<li class="list-group-item col-md-12" th:if="${#lists.isEmpty(casas)}">
+						Nenhuma casa de show foi encontrada
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+</html>

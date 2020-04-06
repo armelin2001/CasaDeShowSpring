@@ -4,34 +4,30 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorator="LayoutPrincipal">
 <head>
-	<title>Cadastro de casas de show</title>
+<title>Login de usuario</title>
 </head>
 <section layout:fragment="conteudo">
 	<div class="container">
-		<form class="form-horizontal"method="POST" action="/casaDeShow" th:object="${casa}">
-			<div th:insert="MensagemGeral">
-			</div>
-			<div th:insert="MensagemErro">
-			</div>
+		<form class="form-horizontal" method="POST" action="login" th:object="${user}">
 			<div class="row justify-content-md-center">
 				<div class="col-md-8">
 					<div class="card text-center">
 						<div class="card-header">
-							<h4></h4>
+							<h1>Login</h1>
 						</div>
 						<div class="card-body">
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">		
-									<input type="hidden" th:field="*{idCasaDeShow}"/>							
-									<div>						
-										<label for="nomeCasa" class="card-text">Nome da casa de show</label>				
-										<input type="text" class="form-control" id="nomeCasa" th:field="*{nomeCasa}"/>
+								<li class="list-group-item">
+
+									<label class="card-text">Usuario</label>
+									<div>
+										<input type="text" class="form-control" id="username"/>
 									</div>
 								</li>
-								<li class="list-group-item">									
+								<li class="list-group-item">
+									<label class="card-text">Senha</label>
 									<div>
-										<label for="endereco">Endereço</label>
-										<input type="text" class="form-control" id="endereco" th:field="*{endereco}"/>
+										<input type="password" class="form-control" id="password">
 									</div>
 								</li>
 								<li class="list-group-item">

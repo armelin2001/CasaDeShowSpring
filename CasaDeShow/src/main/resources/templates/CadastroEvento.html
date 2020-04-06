@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorator="LayoutPrincipal">
+<head>
+<title>Cadastro de eventos</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="container">
+		<form class="form-horizontal" method="POST" action="">
+			<div class="row justify-content-md-center">
+				<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<span th:text="${mensagem}">Evento salvo com sucesso!</span>
+				</div>
+			</div>
+			<div class="row justify-content-md-center">
+				<div class="col-md-8">
+					<div class="card text-center">
+						<div class="card-header">
+							Novo evento
+						</div>
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div>
+										<label for="" class="card-text">Nome do evento</label>
+										
+									</div>
+									<input type="text" class="form-control" id="nomeEvento" name="nomeEvento"/>
+								</li>
+								<li class="list-group-item">
+									<div>
+										<label for="capacidade" class="card-text">Capacidade</label>
+									</div>
+									<input type="text" class="form-control" id="capacidade" name="capacidade"/>
+								</li>
+								<li class="list-group-item">
+									<div>
+										<label for="preco" class="card-text">Preço unidade ingresso</label>
+										
+									</div>
+									<input type="text" class="form-control" id="preco" name="preco"/>
+								</li>
+								<li class="list-group-item">
+									<div>
+										<label for="data" class="card-text">Data do evento</label>
+									</div>
+									<input type="date" class="form-control" id="data" name="data"/>
+								</li>
+								<li class="list-group-item">
+									<label for="" class="card-text">Generos musicais</label>
+									<select class="custom-select" name="generoMusical">
+										<option th:each="generoMusical:${todosGenerosMusicais}" th:value="${generoMusical}" th:text="${generoMusical.genero}"></option>
+									</select>
+								</li>
+								<li class="list-group-item">
+									<label for="" class="card-text">Casas de show</label>
+									<select class="custom-select" name="casaShow">
+										<option th:each="casaShow:${todasCasasDeShow}" th:value="${casaShow}" th:text="${casaShow.nomeCasa}"></option>
+									</select>
+								</li>
+								<li class="list-group-item">
+									<button type="submit" class="btn btn-success">Salvar</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+</html>

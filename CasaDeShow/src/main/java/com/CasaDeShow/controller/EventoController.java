@@ -27,7 +27,8 @@ public class EventoController {
 	private EventoService eventoService;
 	@Autowired
 	private CasaDeShowService casaDeShowService;
-	private static final String CADASTRO_VIEW="";
+	
+	private static final String CADASTRO_VIEW="CadastroEvento";
 	@ModelAttribute("todosGenerosMusicais")
 	public List<GenerosMusicais> todosGenerosMusicais(){
 		return Arrays.asList(GenerosMusicais.values());

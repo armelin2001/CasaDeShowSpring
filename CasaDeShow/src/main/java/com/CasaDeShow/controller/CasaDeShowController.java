@@ -20,11 +20,11 @@ import com.CasaDeShow.service.CasaDeShowService;
 public class CasaDeShowController {
 	@Autowired
 	private CasaDeShowService casaDeShowService;
-	private static final String CADASTRO_VIEW = "";
+	private static final String CADASTRO_VIEW = "CadastroCasas";
 	@RequestMapping
 	public ModelAndView casasDeShow() {
 		List<CasaDeShow> todasCasas = casaDeShowService.listar();
-		ModelAndView mv = new ModelAndView("");//criar view de listagem
+		ModelAndView mv = new ModelAndView("ListagemCasaDeShow");
 		mv.addObject("casas",todasCasas);
 		return mv;
 	}
