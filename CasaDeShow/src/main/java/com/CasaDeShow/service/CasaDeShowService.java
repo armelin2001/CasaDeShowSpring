@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.CasaDeShow.model.CasaDeShow;
 import com.CasaDeShow.repositorio.CasaDeShowRepository;
-import com.CasaDeShow.service.exceptions.CasaDeShowEncontradaException;
 import com.CasaDeShow.service.exceptions.CasaDeShowNaoEncontradaException;
 @Service
 public class CasaDeShowService {
@@ -20,18 +19,18 @@ public class CasaDeShowService {
 		casaDeShow.setIdCasaDeShow(null);
 		return casaDeShowRepository.save(casaDeShow);
 	}
+	public void editar(CasaDeShow casaDeShow){
+		CasaDeShow casaTemp = buscar(casaDeShow.getIdCasaDeShow());
+		casaDeShowRepository.save(casaTemp);
+	}
 	public void excluir(Long idcasaDeShow) {
-		if(casaDeShowRepository.getOne(idcasaDeShow)!=null) {
-			casaDeShowRepository.deleteById(idcasaDeShow);
-		}
-		else {
-			throw new CasaDeShowNaoEncontradaException("Não foi encontrada uma casa de show para deleção");
-		}
+		CasaDeShow casaTemp = buscar(idcasaDeShow);
+		casaDeShowRepository.deleteById(casaTemp.getIdCasaDeShow());
 	}
 	public CasaDeShow buscar(Long idCasaDeShow){
-		CasaDeShow casa = casaDeShowRepository.getOne(idCasaDeShow);
-		if(casa!=null) {
-			return casa;
+		CasaDeShow casaTemp = casaDeShowRepository.getOne(idCasaDeShow);
+		if(casaTemp!=null) {
+			return casaTemp;
 		}
 		else {
 			throw new CasaDeShowNaoEncontradaException("Casa de show não encontrada");

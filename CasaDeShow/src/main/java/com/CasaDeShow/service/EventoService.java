@@ -3,12 +3,10 @@ package com.CasaDeShow.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.CasaDeShow.model.CasaDeShow;
 import com.CasaDeShow.model.Evento;
-import com.CasaDeShow.repositorio.CasaDeShowRepository;
 import com.CasaDeShow.repositorio.EventoRepository;
 import com.CasaDeShow.service.exceptions.EventoNaoEncontradoException;
 
@@ -16,43 +14,32 @@ import com.CasaDeShow.service.exceptions.EventoNaoEncontradoException;
 public class EventoService {
 	@Autowired
 	private EventoRepository eventoRepository;
-	@Autowired
-	private CasaDeShowRepository casaDeShowRepository;
 	public List<Evento> listar(){
 		return eventoRepository.findAll();
 	}
-	public List<CasaDeShow> listarCasas(){
-		return casaDeShowRepository.findAll();
+	public CasaDeShow listarCasas(Long idEvento){
+		Evento eventoTemp = buscar(idEvento);
+		return eventoTemp.getCasaDeShow();
 	}
 	public Evento salvar(Evento evento) {
 		evento.setIdEvento(null);
 		return eventoRepository.save(evento);
 	}
+	public void editar(Evento evento) {
+		Evento eventoTemp = buscar(evento.getIdEvento());
+		eventoRepository.save(eventoTemp);
+	}
 	public void excluir(Long idEvento) {
-		if(eventoRepository.getOne(idEvento)!=null) {
-			eventoRepository.deleteById(idEvento);
+		Evento evento = buscar(idEvento);
+		eventoRepository.deleteById(evento.getIdEvento());
+	}
+	public Evento buscar(Long idEvento) {
+		Evento evento = eventoRepository.getOne(idEvento);
+		if(evento!=null) {
+			return evento;
 		}
 		else {
-			throw new EventoNaoEncontradoException("Não foi possivel deletar esse evento");
+			throw new EventoNaoEncontradoException("Evento não encontrado");
 		}
 	}
-	public void deletar(Long idEvento) {
-		try {
-			eventoRepository.deleteById(idEvento);
-		}catch(EmptyResultDataAccessException e){
-			throw new EventoNaoEncontradoException("");
-		}
-	}
-
-
-
-
 }
-
-
-
-
-
-
-
-
